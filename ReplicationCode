@@ -6,3 +6,25 @@
 ############## THE DATE           #########################################################
 ###########################################################################################
 
+#### HYPOTHESIS 1 ####
+HYP1 <- coxph(Surv(Time1, Time2, Event) ~ 
+               Wsizefactor*Ssizeimpfactor
+                +TypeOfConflictEx+TypeOfConflictstate
+                +TypeOfConflictinternal+ TypeOfConflictinternationalized
+                +IntensityLevel1+IntensityLevel2+
+                +tt(GDPpcST)+ecogrowth + log(pop1) +as.factor(decade)
+                +domestic2+domestic2lag
+                +gender +pspline(startage, df = 3)
+                +IrregularEntry 
+               + prevtimesinoffice 
+                +cluster(id), data=replicationdata) 
+###########################################################################################  
+
+#### HYPOTHESIS 2 ####
+HYP2 <- coxph(Surv(Time1, Time2, Event) ~ 
+              (JW_Boss+JW_Strongman)*TypeOfConflict
+              +IntensityLevel1+IntensityLevel2 
+              +gender+ecogrowth+tt(GDPpcST)
+              +domestic2+domestic2lag 
+              +log(pop1) +as.factor(decade)
+              +cluster(id), data=replicationdata) 
